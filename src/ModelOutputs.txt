@@ -1,0 +1,19 @@
+//BackTestSet,Isolated,Candidate,ReceiptList,DirectoryOfOutputs
+//v4.0.6.1,0,1,2013-01-28 Snapshot 1001.txt,htmloutput - 4.0.6.2 Released (4.0.6.1 + Feedback Tabular Model 260)
+//v4.0.7,0,1,2013-01-28 Snapshot 1001.txt,htmloutput - 4.0.7+textpipeline(switched order)
+//4.1 + Jing's Combiner enhancement for total price,0,1,F,htmloutput - 4.1 + Jing's Combiner enhancement for total price,4.1,htmloutput - 4.1
+//htmloutput,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,4.1,htmloutput - 4.1
+//htmloutput,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,4.1.1 without L3 validation,htmloutput - 4.1.1 without L3 validation
+//htmloutput,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,htmloutput - 4.1.1,htmloutput - 4.1.1
+//htmloutput - 4.1.2 Parallel,0,1,2013-01-28 Snapshot 1001.txt,htmloutput - 4.1.2 Parallel,htmloutput,htmloutput
+//htmloutput,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,htmloutput - 4.1.1 Tabular Only,htmloutput - 4.1.1 Tabular Only
+//htmloutput,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,htmloutput - 4.1.1 Tabular 285,htmloutput - 4.1.1 Tabular 285
+//htmloutput 4.1.3,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,htmloutput - 4.1.2 +,htmloutput - 4.1.2 +
+htmloutput,0,1,2013-01-28 Snapshot 1001.txt,htmloutput,htmloutput - 4.2.4 Before Merge,htmloutput - 4.2.4 Released
+//BCIT 4.1.3 candidate,0,1,BCIT test receipts 199 - groundtruth.txt,htmloutput,BCIT 4.1.1,htmloutput - BCIT 4.1.1 With Strong Validation
+//htmloutput 4.1.7 with Jing's2,0,1,2013-5-6 set Snapshort 1000.txt,htmloutput,htmloutput 4.1.7,htmloutput - 4.1.9 996
+//htmloutput - 4.1.9 756 With All External And new FeedbackCharges,0,1,2013 07-02 set 756.txt,htmloutput,htmloutput - 4.1.9 756,htmloutput - 4.2.2 Combined 756 1001
+//htmloutput - 4.1.9 756 With All External And new FeedbackCharges,0,1,2013 07-02 set 756.txt,Jing's github htmloutput - 756,Jing's github htmloutput - 756
+//htmloutput - No Externals,0,1,2013 07-02 set 756.txt,htmloutput - 4.2.2.1 No Externals,2Jing's github htmloutput - 756,Jing github htmloutput - 756
+//htmloutput - With Externals,0,1,2013 07-02 set 756.txt,htmloutput,htmloutput - 4.2.2.1 No Externals,htmloutput - 4.2.2.1 No Externals
+//htmloutput - 4.2.4,0,1,2013 07-02 set 756.txt,htmloutput,htmloutput - 4.2.3,htmloutput - 4.2.4 Released

@@ -1,0 +1,7 @@
+//BackTestSet,Isolated,Candidate,ReceiptList,DirectoryOfOutputs
+//999 Set        ,1,0,2012-12-03 Snapshot List.txt,htmloutput - V3.9.5 Old Model Isolated/
+//999 Set        ,0,0,2012-12-03 Snapshot List.txt,htmloutput - V3.9.5 Old Model Pipeline/
+//999 Set        ,1,1,2012-12-03 Snapshot List.txt,htmloutput - V3.9.5 New Model Isolated/
+//999 Set        ,0,1,2012-12-03 Snapshot List.txt,htmloutput - V3.9.5 New Model Pipeline/
+//OneOffMerchants,0,1,2012-12-13 One Off Merchants List.txt,htmloutput - V3.9.5 One-Off Merchants New Model Pipeline/
+v4.0.8 + Refactored Results Combiner + AmazonSS,0,1,2013-01-28 Snapshot 1001.txt,htmloutput

@@ -1,0 +1,32 @@
+-----VERIFICATION RESULT IS TRUE (PIPELINE)-----
+
+                    OLD        NEW
+OneOffMerchants    414/764    426/764    
+999 Set            737/999    748/999    
+
+-----FALLBACK (PIPELINE)-----
+
+                    OLD        NEW
+OneOffMerchants    214/764    201/764    
+999 Set            166/999    160/999    
+
+****************************************************************************
+OVERALL THE NEW MODEL SEEMS TO BE BETTER?: true
+****************************************************************************
+
+
+
+---- DIFF FOR TRUE-TO-FALSE NEW PIPELINE 999 SET ----
+
+Bloomingdale's --- HTML --- 6f16ae18-a4bb-421a-beba-cb4a835a07fa
+DIRECTV --- HTML --- 36d93563-0669-471d-8e27-b0ac0130dc8e
+DIRECTV --- HTML --- 550a822d-8495-4b76-9537-e53beb312db8
+DIRECTV --- HTML --- 58e84f78-c131-4ee7-97af-bc40a097073d
+Eat 24 Hours --- HTML --- e801b4af-3401-4a7a-85a0-049c7e768781
+Half.com --- HTML --- d38fe635-38d1-4756-812c-b5d4453dc659
+OpenSky --- HTML --- db4f3eaf-7483-44cb-a519-66878b2a1dcc
+Sneakpeeq --- HTML --- 0fb759c9-f8be-42fb-aa8d-aff7a28db4b0
+SuperShuttle --- HTML --- 3c3cce09-dc23-4446-8901-65c0eb4e3f96
+Toys 'R' Us --- HTML --- 53c7dc94-4b51-4b0c-8a4b-0e5f22a8161f
+Toys 'R' Us --- HTML --- e7d5259e-cf38-495e-aabe-5c5aa1323d12
+Urban Outfitters --- HTML --- 6f2f5fcc-c585-4c6a-bd61-ce1a600d8737

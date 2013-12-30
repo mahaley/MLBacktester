@@ -57,7 +57,7 @@ public class OutputReport {
 		System.out.println("\n\n----------------------------------------GROUND TRUTH COMPARISION ----------------------------------");
 		int modelNum = 0; //the model to compare to the ground truth
 		os.get(modelNum).compareToTruth(); //does the comparison
-		os.get(modelNum).printDiff(os.get(modelNum).trueDiff.get(1), "GOT INCORRECT TOTAL", false); //can change the string in this call to compare the model at any parameter.
+		os.get(modelNum).printDiff(os.get(modelNum).trueDiff.get(0), "OVERALL CORRECT", false); //can change the string in this call to compare the model at any parameter.
 		//  <----- 
 		
 	}

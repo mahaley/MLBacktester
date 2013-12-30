@@ -183,8 +183,10 @@ public class ModelSummary {
 					}
 				}
 				resultReader.close();
-				String[] lineSplit = line.split(",");//String[] lineSplit = line.split(",\\t"); //
+				String[] lineSplit = line.split(",\\t"); // String[] lineSplit = line.split(",");//
 				try {
+                                    if (guid.contains("2a5c14e4-7e38-4e99-8847-771337fcb6b6"))
+                                            System.out.println("here");
 				Receipt r = new Receipt(guid, 
 						lineSplit[merNmCol],
 						(Boolean)isTrueResult,
@@ -311,18 +313,20 @@ public class ModelSummary {
 			Entry<String, Receipt> e = oldIter.next();
 			String guidOld = e.getKey();
 			Receipt rOld = e.getValue();
-                        if (rOld==null) 
+                        /*if (rOld==null) 
                             System.out.println("here");
                         
-                        if (guidOld.contains("2eb72a0d-4e7e-4c77-852e-a6a0739b3667"))
-                                System.out.println("here");
+                        if (guidOld.contains("2a5"))
+                                System.out.println("here");*/
 
 			Receipt rNew = this.getOutputSet().get(guidOld);
-                        if (rNew==null) 
-                            System.out.println("here");
+                        /*if (rNew==null) 
+                            System.out.println("here"); */
 			if (!rNew.verif && rOld.verif) {
 				trueToFalse.add(rNew);
-				if (rOld.total == rOld.trueTotal && (rOld.trueNumItems==0 || rOld.numItems == rOld.trueNumItems)) {
+				if ((rOld.total == rOld.trueTotal && (rOld.trueNumItems==0 || rOld.numItems == rOld.trueNumItems)) &&
+                                    (rNew.total == rNew.trueTotal && (rNew.trueNumItems==0 || rNew.numItems == rNew.trueNumItems)))
+                                {
 					trueToFalseAndCorrect.add(rNew);
 				}
 			} else if (rNew.verif && !rOld.verif) {
@@ -365,7 +369,7 @@ public class ModelSummary {
 		//take each of those ArrayLists, and put them into a hashmap, keyed by a descriptive string. Will access the arraylists in the main method by the string, so make it compact and descriptive.
 		HashMap<String,ArrayList<Receipt>> result = new HashMap<String,ArrayList<Receipt>>();
 		result.put("TRUE-TO-FALSE", trueToFalse);
-		result.put("TRUE-TO-FALSE-NEGATIVE", trueToFalseAndCorrect);
+		result.put("TRUE-POSITIVE-TO-FALSE-NEGATIVE", trueToFalseAndCorrect);
 		result.put("FALSE-TO-TRUE", falseToTrue);
 		
 		result.put("NEW-OVERALL-FALSE-POSITIVE", newFalsePos);

@@ -52,7 +52,7 @@ public class Constants {
 	public static final String[] FEATURE_TOTAL = {"total"};
         public static final String[] FEATURE_SHIPPING = {"shipping","freight", "FREE Super Saver Delivery","Shipping/Handling","shipping and handling","shipping \\& handling","Shipping \\& Processing","Free Shipping"};
         public static final String[] FEATURE_TOTAL_LABEL = {"what's this?","subtotal","sub total","item total","product total","merchandise","merchandise subtotal","sub-total","total purchases","total product","total before tax","total items","order total","order grand total","grand total","item subtotal"};
-        public static final String[] FEATURE_TAX = {"tax","vat","v.a.t.","%","estimated tax","sales tax"};
+        public static final String[] FEATURE_TAX = {"tax","vat","v.a.t.","%","estimated tax","sales tax","Taxes & service fees"};
         public static final String[] FEATURE_DISCOUNT = {"discount","save","promotion","savings","coupon","Promotional Code","Promo Savings:","Gift Card"};
         public static final String FEATURE_TOTAL_WORD = "Total";
 	public static final String FEATURE_PURCHASE_TOTAL = "purchase total";

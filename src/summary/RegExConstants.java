@@ -126,7 +126,7 @@ public class RegExConstants {
 
     static {
         //itemDescriptionInvalidators.addAll(Arrays.asList(com.itemize.ml.process.extractor.Constants.UNWANTED_NON_ITEM_TABLE_WORDS));
-        specificLabels.addAll(makeCaseAgnosticAndEntireSpan(Arrays.asList(Constants.FEATURE_SHIPPING)));
+        specificLabels.addAll(makeCaseAgnostic(Arrays.asList(Constants.FEATURE_SHIPPING)));
         specificLabels.addAll(makeCaseAgnosticAndEntireSpan(Arrays.asList(Constants.FEATURE_TAX)));
         specificLabels.addAll(makeCaseAgnosticAndEntireSpan(Arrays.asList(Constants.FEATURE_DISCOUNT)));
         specificLabels.addAll(makeCaseAgnosticAndEntireSpan(Arrays.asList(Constants.FEATURE_TOTAL_LABEL)));

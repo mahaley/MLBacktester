@@ -154,7 +154,7 @@ public class ModelSummary {
 		String guid;
 
 		while((line = reader.readLine() ) != null ) {
-			guid = line.split(",")[guidCol];
+			guid = line.split(",{0,1}\\t")[guidCol];
 			File resultFile = OutputReport.findFile(guid, directory);
 			if (resultFile != null) {
 				BufferedReader resultReader = new BufferedReader(new FileReader(resultFile));
@@ -183,7 +183,7 @@ public class ModelSummary {
 					}
 				}
 				resultReader.close();
-				String[] lineSplit = line.split(",\\t"); // String[] lineSplit = line.split(",");//
+				String[] lineSplit = line.split(",{0,1}\\t"); // String[] lineSplit = line.split(",");//
 				try {
                                     if (guid.contains("2a5c14e4-7e38-4e99-8847-771337fcb6b6"))
                                             System.out.println("here");

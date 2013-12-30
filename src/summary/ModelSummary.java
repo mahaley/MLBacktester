@@ -37,8 +37,10 @@ public class ModelSummary {
 	//private static final int currCol = 5;
 	private static final int recTypeCol = 6;
 	//private static final int formerSource = 7;
-	private static final int trueTotalCol = 8;
-	private static final int trueNumItemsCol = 10;
+	private static final int eTrueTotalCol = 8;
+        private static final int ocrTrueTotalCol = 7;
+	private static final int eTrueNumItemsCol = 10;
+        private static final int ocrTrueNumItemsCol = 9;
 	private static final int subjectLineCol = 12;
 
 
@@ -154,8 +156,15 @@ public class ModelSummary {
 		String guid;
 
 		while((line = reader.readLine() ) != null ) {
-			guid = line.split(",{0,1}\\t")[guidCol];
-			File resultFile = OutputReport.findFile(guid, directory);
+                        File resultFile;
+			guid = line.split(",{0,1}\\t")[guidCol].trim();
+                        try{
+                           resultFile = OutputReport.findFile(guid, directory);
+                        }catch(Exception e){
+                           System.out.println(e);
+                           resultFile = null;
+                        }
+			
 			if (resultFile != null) {
 				BufferedReader resultReader = new BufferedReader(new FileReader(resultFile));
 				String resultLine;
@@ -183,11 +192,12 @@ public class ModelSummary {
 					}
 				}
 				resultReader.close();
-				String[] lineSplit = line.split(",{0,1}\\t"); // String[] lineSplit = line.split(",");//
+				String[] lineSplit = line.split(",{0,1}\\t");
+                                if (lineSplit.length <= 1) lineSplit = line.split(",");                                   
 				try {
-                                    if (guid.contains("2a5c14e4-7e38-4e99-8847-771337fcb6b6"))
-                                            System.out.println("here");
-				Receipt r = new Receipt(guid, 
+                                Receipt r;
+                                if (lineSplit.length <= 11){
+                                    r = new Receipt(guid, 
 						lineSplit[merNmCol],
 						(Boolean)isTrueResult,
 						grandTotal,
@@ -195,14 +205,30 @@ public class ModelSummary {
 						lowConfidence,
 						numItems,
 						(String[]) null,
-						Float.parseFloat(lineSplit[trueTotalCol]),
-						Integer.parseInt(lineSplit[trueNumItemsCol]),
+						Float.parseFloat(lineSplit[ocrTrueTotalCol]),
+						Integer.parseInt(lineSplit[ocrTrueNumItemsCol]),
+						(String[])null,
+						null,
+						confidence);
+                                }else{
+                                    r = new Receipt(guid, 
+						lineSplit[merNmCol],
+						(Boolean)isTrueResult,
+						grandTotal,
+						lineSplit[recTypeCol],
+						lowConfidence,
+						numItems,
+						(String[]) null,
+						Float.parseFloat(lineSplit[eTrueTotalCol]),
+						Integer.parseInt(lineSplit[eTrueNumItemsCol]),
 						(String[])null,
 						lineSplit[subjectLineCol],
 						confidence);
+                                }    
+				
 					addReceipt(r);
 				} catch (Exception e) {
-					System.out.println("Failed to add: " + guid + "  " + lineSplit[trueTotalCol] + "\n\t" + line);
+					System.out.println("Failed to add: " + guid + "  " + "\n\t" + line);
 				}
 				
 			}

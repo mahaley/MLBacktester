@@ -16,10 +16,10 @@ import java.util.Set;
  */
 public class OutputReport {
 
-	private static final String mainDir = "C:/Experiments/Mike/";//"C:\\Users\\Mike\\Dropbox\\Validation Sets\\";
-	private static final String modelOutputsPath = "C:/itemize/Copy of MLBackTest/src/ModelOutputs.txt"; 
+	private static final String mainDir = "D:/Experiments/Mike/";//"C:\\Users\\Mike\\Dropbox\\Validation Sets\\";
+	private static final String modelOutputsPath = "D:/itemize/Jings Backtester/MLBacktester/src/ModelOutputs.txt"; 
 
-	public static ArrayList<ModelSummary> os = new ArrayList<ModelSummary>(); //a collection of all the outputs
+	public static ArrayList<ModelSummary> os = new ArrayList<>(); //a collection of all the outputs
 	
 	public static void main(String[] args) throws IOException {
 		readInModelOutputs(); //reads in the config file (modelOutputsPath)
@@ -57,7 +57,7 @@ public class OutputReport {
 		System.out.println("\n\n----------------------------------------GROUND TRUTH COMPARISION ----------------------------------");
 		int modelNum = 0; //the model to compare to the ground truth
 		os.get(modelNum).compareToTruth(); //does the comparison
-		os.get(modelNum).printDiff(os.get(modelNum).trueDiff.get(0), "OVERALL CORRECT", false); //can change the string in this call to compare the model at any parameter.
+		os.get(modelNum).printDiff(os.get(modelNum).trueDiff.get(0), "GOT NO TOTAL", false); //can change the string in this call to compare the model at any parameter.
 		//  <----- 
 		
 	}
@@ -205,7 +205,9 @@ public class OutputReport {
 		//finds the ML output file for a given GUID
 		File[] f = directory.listFiles(new FilenameFilter() { 
 			public boolean accept(File dir, String filename)
-			{ return filename.endsWith(guid + ".txt"); }
+			{ 
+                            return (filename.endsWith(guid + ".txt") || filename.endsWith(guid + "AUTO.txt") || filename.endsWith(guid + "COLORBITONALAUTO.txt")); 
+                        }
 		} );
 		if (f!=null && f.length > 0) {return f[0];}
 		else {return null;}

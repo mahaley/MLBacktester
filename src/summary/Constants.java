@@ -2,6 +2,7 @@ package summary;
 
 //import com.itemize.ml.vo.HtmlSpecialCharacter;
 
+
 public class Constants {
 	public static final String REGEX_TYPE_DATE = "date";
 	public static final String COMMON_DATE_FORMAT = "MM/dd/yyyy";
@@ -16,7 +17,6 @@ public class Constants {
         public static final String FEATURE_HTML_DISCOUNT = "FEA_DISCOUNT";
 	public static final String FEATURE_DELIMITER = "\t";
         public static final String SIMPLE_DATE_TIME_FORMAT = "yy-MM-dd-HHmm";
-	
 
 	//"order number"
 	public static final String[] USEFUL_WORDS={"order date","order dt", "qty", "item", "cost","payment","subtotal","total"}; //payment added for shop1
@@ -35,11 +35,11 @@ public class Constants {
 	public static final String[] FEATURE_PREPROCESSOR_HTML_HEADER_UNWANTED_CHARCTERS={"*", ".", "#"};
 	public static final String[] REQUIRED_TABLE_HEADER_WORDS={"item", "cost", "price","total", "subtotal", "description", "product", "name", "quantity", "qty", "amount", "style", "each", "ups deliverable merchandise", "title", "you purchased", "deal", "rate", "your order","UPS Standard Ground"};
 	//"card"  removed
-        public static final String[] UNWANTED_NON_ITEM_TABLE_WORDS={"billed to","order summary","merchandise: shipping: tax:","loyalty","tax: grand total:","order time","questions?","-----------", "Walmart.com Total:", "returns policy", "payment method", "paypal", "american express", "billing", "master ending", "surcharge", "off", "tendered", "insurance", "payment info", "credit card:", "customer no", "method of payment", "pickup", "bill To", "ship to","balance due","store credit", "reward", "samples credit", "misc.", "stamp", "buysafe",
+        public static final String[] UNWANTED_NON_ITEM_TABLE_WORDS={"Qty","subtotal","Shipment Subtotal","ITEMS ORDERED","view deal","charged to","billed to","order summary","merchandise: shipping: tax:","loyalty","tax: grand total:","order time","questions?","-----------", "Walmart.com Total:", "returns policy", "payment method", "paypal", "american express", "billing", "master ending", "surcharge", "tendered", "insurance", "payment info", "credit card:", "customer no", "method of payment", "pickup", "bill To", "ship to","balance due","store credit", "reward", "samples credit", "misc.", "buysafe",
 								"fob charge", "other", "addtl charge", "adjustments", "coupons", "extra bucks", "miscellaneous charges", "authorized amount", "service charge", "mrkd", "coupon:", "change due:", "estimated winner","net total" ,
-								  "credit card","dt bucks", "extra cash", "processing fee", "retail price", "net product", "visa", "deposit", "extended warranty", "calling plan", "monthly access", "you saved", "check order status","upc","Introducing Google Play","PayPal"};
+								  "credit card","dt bucks", "extra cash", "processing fee", "retail price", "net product", "visa", "deposit", "extended warranty", "calling plan", "monthly access", "you saved", "check order status","upc","Introducing Google Play","PayPal", "My Account", "Purchase Details", "Status", "View your purchase history"};
 	public static final String[] PRODUCT_ATTRIBUTES={"size:","color:","colour:","width:","quantity:","Sold by:","price:","item #","width:","length:","SKU#","item#:"};
-
+        public static final String[] GRAND_TOTAL_WHITELIST={"INCLUDING GST","INCL GST","INCLUDING TAX","INCL TAX"};
         
         
         //JL - Below is the original, before attempting to extract subtotal, tax, shipping, etc.
@@ -48,23 +48,29 @@ public class Constants {
 								  "credit card","dt bucks", "sub-total", "extra cash", "processing fee", "retail price", "total product", "net product", "settlement", "tip", "fee", "item(s) total", "visa", "deposit", "extended warranty", "calling plan", "monthly access","s&amp;h", "you saved", "mc **********", "save", "check order status","upc"};
         */
         //public static final String[] UNWANTED_NON_ITEM_TABLE_WORDS={"shipping", "discounts", "subtotal", "tax", "promotions","card", "-----------", "Walmart.com Total:", "gift", "merchandise", "returns policy"};
-	public static final String[] NON_ITEM_TABLE_WORDS_FOR_TOTAL_SUPPRESS={"(inc shipping)", "Write a Review",  "Report a Problem", "View Privacy Policy","Movie Rental","Paid on"};
-	public static final String[] FEATURE_TOTAL = {"total"};
-        public static final String[] FEATURE_SHIPPING = {"shipping","freight", "FREE Super Saver Delivery","Shipping/Handling","shipping and handling","shipping \\& handling","Shipping \\& Processing","Free Shipping"};
-        public static final String[] FEATURE_TOTAL_LABEL = {"what's this?","subtotal","sub total","item total","product total","merchandise","merchandise subtotal","sub-total","total purchases","total product","total before tax","total items","order total","order grand total","grand total","item subtotal"};
-        public static final String[] FEATURE_TAX = {"tax","vat","v.a.t.","%","estimated tax","sales tax","Taxes & service fees"};
+	public static final String[] NON_ITEM_TABLE_WORDS_FOR_TOTAL_SUPPRESS={"ITEMS ORDERED","(inc shipping)", "Write a Review",  "Report a Problem", "View Privacy Policy","Movie Rental","Paid on"};
+	
+        public static final String[] FEATURE_TOTAL = {"total"};
+        public static final String[] FEATURE_SHIPPING = {"shipping","freight", "FREE Super Saver Delivery","Shipping/Handling","shipping and handling","shipping \\& handling","Shipping \\& Processing","Free Shipping","Standard Ground"};
+        public static final String[] FEATURE_SUBTOTAL_LABEL = {"what's this?","subtotal","sub total","item total","product total","merchandise","merchandise subtotal","sub-total","total purchases","total product","total before tax","total items","order total","order grand total","grand total","item subtotal"};
+        public static final String[] FEATURE_TAX = {"tax","%","estimated tax","sales tax","Taxes & service fees"};
         public static final String[] FEATURE_DISCOUNT = {"discount","save","promotion","savings","coupon","Promotional Code","Promo Savings:","Gift Card"};
         public static final String FEATURE_TOTAL_WORD = "Total";
 	public static final String FEATURE_PURCHASE_TOTAL = "purchase total";
 	public static final String FEATURE_ORDER_DATE = "Order Date";
+        public static final String FEATURE_CHANGE = "change";
+        public static final String FEATURE_TIP = "tip";
+        public static final String FEATURE_CASH_TENDERED = "cash";
+        public static final String[] FEATURE_ACCOUNT_BALANCE = {"Available Balance","Present Balance"};
 	public static final String[] REQUIRED_DATE_IN_NON_TABLE_DATA_WORDS={"order", "placed on"};
+        public static final String[] signature_black_ls = {"gmail","yahoo","hotmail","aol"};
 	
 	//File naming conventions
 	public static final String FILE_NAME_PREPROCESSOR_PREFIX = "preprocessed-receipt-";
 	public static final String FILE_NAME_FEATUE_EXTRACTOR_PREFIX = "feature-";
 	public static final String FILE_NAME_MERGER_RULE_PREFIX = "rule-";
 	public static final String FILE_NAME_MERGER_OUTPUT_PREFIX = "merge-";
-	public static final String FEATURE_PREFIX="FEA_";
+	
 	
 	//Dictionary search
 	public static final String[] DICTIONARY_NAME={"merchants","products"};
@@ -91,6 +97,7 @@ public class Constants {
 	public static final String REGEX_MANAGER_LABEL_DESCRIPTION = "description";
 	public static final String REGEX_MANAGER_LABEL_FEATURE="feature";
 	public static final String REGEX_MANAGER_LABEL_JAVA_DATE_FORMAT="javaformat";
+        public static final String REGEX_MANAGER_LABEL_INVERTIBLE="invertible";
 	public static final String REGEX_MANAGER_ROOT_TAG_NAME="regex";
 
 	//Receipts Tye
@@ -99,6 +106,7 @@ public class Constants {
 	public static final String COLON_DELIMITER = ":";
 	public static final String COMMA_DELIMITER = ","; 
 	public static final String SEMICOLON_DELIMITER = ";";
+        public static final String TILDE_DELIMITER = "~";
 	public static final String DICT_DIR = "/normalizationdictionary"; 
 	public static final String ABBRV_DICT = "/abbreviation.txt";
 	public static final String ALTERNATIVES_DICT = "/canonicalmerchants.txt";
@@ -128,31 +136,61 @@ public class Constants {
 	//public static final String parser1_1_process = "Parser1_1"  ;
         public static final String simple_parser_process = "SimpleParser";
         public static final String summary_simple_parser_process = "SummaryReceiptSimpleParser";
-        public static final String text_simple_parser_process = "Level1SimpleParser-Text";
-        public static final String text_nontabular_simple_parser_process = "Level1SimpleParser-Text-NonTabular";
-        public static final String hotel_simple_parser_process = "Level1SimpleParser-Hotel";
+        public static final String level1_text_simple_parser_process = "Level1SimpleParser-Text-Curated";
+        public static final String level1_ocr_receipt_simple_parser_single_zone = "Level2ReceiptSimpleParser-AutoZoneFeedBack-QA-OcrText";
+        public static final String level1_ocr_receipt_simple_parser_auto_zone = "Level2ReceiptSimpleParser-AutoZoneFeedBack-QA-OcrText";
+        public static final String level2_ocr_receipt_simple_parser_single_zone = "Level2ReceiptSimpleParser-AutoZoneFeedBack-QA-OcrText";
+        public static final String level2_ocr_receipt_simple_parser_auto_zone = "Level2ReceiptSimpleParser-AutoZoneFeedBack-QA-OcrText";
+        public static final String level2_ocr_receipt_simple_parser_single_zone_vat = "Level2ReceiptSimpleParser-AutoZoneFeedBack-QA-OcrText";
+        public static final String level2_ocr_receipt_simple_parser_auto_zone_vat = "Level2ReceiptSimpleParser-AutoZoneFeedBack-QA-OcrText";
+        public static final String text_simple_parser_process = "SimpleParser-Text-Curated";
+        public static final String summary_text_simple_parser_process = "SummaryReceiptSimpleParser-Text-Curated";
+        public static final String level3_text_simple_parser_process = "Level3SimpleParser-Text-Curated";
+        public static final String merid_hotel_simple_parser_process = "MeridianSimpleParser-Hotel";
+        public static final String merid_transport_simple_parser_process = "MeridianSimpleParser-Transportation";
         public static final String one_off_text_process1 = "Level3SimpleParser-Text-OneOff-1";
         public static final String tabular_simple_parser_process  = "TabularReceiptSimpleParser";
         public static final String tabular_simple_parser_process2 = "TabularReceiptSimpleParser2";
+        public static final String tabular_simple_parser_process3 = "TabularReceiptSimpleParser3";
+        public static final String tabular_simple_parser_charges = "TabularReceiptSimpleParserCharges";
         public static final String one_off_parser_process =  "SummarySimpleParserOneOff-Ticketmaster";
 
         public static final String one_off_parser_process2 = "SimpleParserOneOff-Seamless";
         public static final String one_off_parser_process3 = "Level1SimpleParserOneOff-Paypal";
-        public static final String one_off_parser_process4 = "SimpleParser-AmazonShipping";
-        public static final String one_off_parser_process5 = "SimpleParser-Ebay";
-        public static final String one_off_parser_process6 = "SimpleParser-Etsy";
-        public static final String one_off_parser_process7 = "SimpleParser-Nordstrom";
-        public static final String one_off_parser_process8 = "SimpleParser-VictoriasSecret";
-        public static final String simple_parser_feedback = "SimpleParserFeedback";
+        public static final String one_off_parser_process4 = "SimpleParserOneOff-AmazonChargesImages";//SimpleParserOneOff-AmazonChargesImages
+        public static final String one_off_parser_process5 = "SimpleParserOneOff-Ebay";
+        public static final String one_off_parser_process6 = "SimpleParserOneOff-Etsy";
+        public static final String one_off_parser_process7 = "SimpleParserOneOff-Nordstrom";
+        public static final String one_off_parser_process8 = "SimpleParserOneOff-VictoriasSecret";
+        public static final String simple_parser_feedback = "SimpleParserFeedback-Curated";
+        public static final String simple_parser_feedback2 = "SimpleParserFeedBack2-Curated";
+        public static final String simple_parser_charges = "SimpleParserCharges";
+        public static final String simple_parser_charges_vat = "SimpleParserCharges-VAT";
+        public static final String level1_simple_parser = "Level1SimpleParser";
         
+        public static final String[] default_one_off_models = {
+                                                            one_off_parser_process,
+                                                            one_off_parser_process2,
+                                                            one_off_parser_process3,
+                                                            one_off_parser_process4,
+                                                            one_off_parser_process5,
+                                                            one_off_parser_process6,
+                                                            one_off_parser_process7,
+                                                            one_off_parser_process8,
+                                                            one_off_text_process1
 
-        public static final String[] all_models = { parser1_process,
+                                                        };
+        public static final String[] all_html_models = { 
+                                                    parser1_process,
                                                     parser1_AlternateProcess,
                                                     simple_parser_process,
                                                     simple_parser_feedback,
+                                                    simple_parser_charges_vat,
                                                     summary_simple_parser_process,
                                                     tabular_simple_parser_process,
                                                     tabular_simple_parser_process2,
+                                                    tabular_simple_parser_process3,
+                                                    level1_simple_parser,
                                                     one_off_parser_process,
                                                     one_off_parser_process2,
                                                     one_off_parser_process3,
@@ -166,38 +204,74 @@ public class Constants {
         
         public static final String[] hotel_models = {
                                                         simple_parser_feedback,
-                                                        hotel_simple_parser_process
+                                                        merid_hotel_simple_parser_process
                                                     };
 
-        public static final String[] live_execution_tool_models = { parser1_process,
+        //public static final String[] live_execution_tool_models = all_html_models;
+        
+        public static final String[] live_execution_tool_models = { 
+                                                                    parser1_process,
                                                                     parser1_AlternateProcess,
-                                                                    //one_off_parser_process2, //make sure Seamless gets the merchant (restaurant)
-                                                                    simple_parser_feedback,  
+                                                                    level1_simple_parser,
+                                                                    simple_parser_charges,
+                                                                    simple_parser_charges_vat,
+                                                                    simple_parser_feedback,
+                                                                    simple_parser_feedback2,
+                                                                    tabular_simple_parser_charges,
                                                                     tabular_simple_parser_process,
                                                                     tabular_simple_parser_process2, 
+                                                                    tabular_simple_parser_process3,
                                                                     summary_simple_parser_process,
                                                                     simple_parser_process,
                                                                    } ;
+                                                                   
+                                                                   
         public static final String[] text_models = {
                                                     one_off_text_process1,
                                                     text_simple_parser_process,
-                                                    text_nontabular_simple_parser_process,
+                                                    //summary_text_simple_parser_process,
+                                                    level3_text_simple_parser_process
                                                     };
-       
+        public static final String[] result_combiner_models = { parser1_process,
+                                                                parser1_AlternateProcess,
+                                                                simple_parser_charges,
+                                                                level1_simple_parser,
+                                                                tabular_simple_parser_charges,
+                                                                simple_parser_feedback,
+                                                                simple_parser_feedback2,
+                                                                tabular_simple_parser_process,
+                                                                tabular_simple_parser_process2,
+                                                                tabular_simple_parser_process3,
+                                                                summary_simple_parser_process,
+                                                                simple_parser_process,
+                                                                text_simple_parser_process,
+                                                                summary_text_simple_parser_process,
+                                                                level3_text_simple_parser_process
+                                                              };
         public static final String[] feed_back_loop_html_models = {
                                                                 tabular_simple_parser_process,
-                                                                simple_parser_process
+                                                                summary_simple_parser_process,
+                                                                level1_simple_parser,
+                                                                simple_parser_process,
+                                                                simple_parser_charges,
+                                                                tabular_simple_parser_charges
                                                             };
         public static final String[] feed_back_loop_text_models = { 
+                                                                    level1_text_simple_parser_process,
                                                                     text_simple_parser_process,
-                                                                    text_nontabular_simple_parser_process
+                                                                    summary_text_simple_parser_process,
+                                                                    level3_text_simple_parser_process,
+                                                                    level1_ocr_receipt_simple_parser_single_zone,
+                                                                    level1_ocr_receipt_simple_parser_auto_zone
                                                                 };
                                                                    
 
         public static final String[] SIMPLE_PARSERS = { simple_parser_process,
+                                                        simple_parser_charges,
                                                         summary_simple_parser_process,
                                                         tabular_simple_parser_process,
                                                         tabular_simple_parser_process2,
+                                                        tabular_simple_parser_process3,
                                                         one_off_parser_process,
                                                         one_off_parser_process2,
                                                         one_off_parser_process3,
@@ -215,6 +289,8 @@ public class Constants {
         public static final String[] TABULAR_SIMPLE_PARSERS={
                                                             tabular_simple_parser_process,
                                                             tabular_simple_parser_process2,
+                                                            tabular_simple_parser_process3,
+                                                            tabular_simple_parser_charges
                                                             };
         public static final String[] ONE_OFF_PARSERS={ one_off_parser_process,
                                                        one_off_parser_process2,
@@ -236,6 +312,8 @@ public class Constants {
         public static final String[] ORDER_NUMBER_UNWANTED_CHARCTES        = { "\n", ":", "#" };
  	public static final String[] NOT_REQUIRED_TABLE_HEADER_WORDS={"item discount"};
         public static final String[] OTHER_LABELS={"Thank you", "Thanks again", "Special Savings", "Legal Agreement", "Group my items", "Last 4 digits", "Order#", "Order #", "Order Date", "Invoice", "Receipt", "Order Date", "Billed To", "Sold By", "Card Number", "DOCUMENT_BEGIN", "tip:", "Ready For Pickup", "Item Description","Card to Charge:","------"};
+        public static final String[] CHARGES_BLACK_LABELS={"change","balance","due"};
+        public static final String[] ENHANCED_CHARGES_FIELD = {"subtotal","tax","discount","shipping","other_charges"};
 
         
 }

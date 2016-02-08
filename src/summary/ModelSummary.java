@@ -3,10 +3,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,6 +67,7 @@ public class ModelSummary {
 		return outputSet;
 	}
 
+    @Override
 	public String toString() {
 		//gets a string representation of hte OutputSummary
 		StringBuilder sb = new StringBuilder();
@@ -246,19 +244,66 @@ public class ModelSummary {
             result = matcher.group();
             return result;
         }
-    public static String fetchNormalizedPrice(String priceToken) { //TODO this should really return a float or decimal (or null)
-        if (priceToken==null || priceToken.matches(".*201[0-9]$")) return (""); 
-        String firstPriceWithCurrency=fetchFirstPriceWithCurrency(priceToken);
-        //if (!firstPriceWithCurrency.isEmpty()) priceToken=firstPriceWithCurrency;
-        String normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_1, priceToken);
-        if (normalizedPrice.isEmpty()) normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_2, priceToken);
-        if (normalizedPrice.isEmpty() && regExMatchesSubsequenceOfString(RegExConstants.GRATIS, priceToken)) return("0");
-        //if (regExMatchesSubsequenceOfString(RegExConstants.NEGATIVE_CURRENCY_PRICE_REGEX, priceToken)) 
-            //normalizedPrice="-"+normalizedPrice;
-        return normalizedPrice.replace(",", "");  
+        
+            public static String fetchRegExMatch(List<String> regExs, String input) {
+        String result = "";
+        for (String reg : regExs)
+        {
+            String str = fetchRegExMatch(reg, input);
+            if (str != null && !str.isEmpty()){
+                result = str;
+                break;
+            }
+        }
+        return result;
     }
     
-     public static String fetchFirstPriceWithCurrency(String priceToken) {
+     public static String fetchRegExMatch(String[] regExs, String input) {
+       return fetchRegExMatch(Arrays.asList(regExs), input);
+    }
+       public static String fetchFirstCapturingGroup(String regEx, String input) {
+        String result = "";
+        Matcher matcher = Pattern.compile(regEx).matcher(input);
+        if (matcher.find()) {
+            result = matcher.group(1); 
+        }
+        return result;
+    }
+           public static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst(regex+"(?!.*?"+regex+")", replacement);
+    }
+        
+       public static String fetchNormalizedPrice(String priceToken) { //TODO this should really return a float or decimal (or null)
+        //if (priceToken==null /*|| priceToken.matches(".*201[0-9]$")*/) return (""); 
+        /*
+        String normalizedPriceLargeFont=fetchRegExMatch(RegExConstants.ALL_PRICE_REGEX, priceToken).replace(" ","");
+        if (normalizedPriceLargeFont.isEmpty()) normalizedPriceLargeFont=replaceLast(fetchFirstCapturingGroup(RegExConstants.NORMALIZED_PRICE_REGEX_PAPER, priceToken).trim().replace("-",".").replace("_","."), " ", ".");
+ 
+        String firstPriceWithCurrency=fetchNormalizedFirstPriceWithCurrency(priceToken);
+   
+        if (!firstPriceWithCurrency.isEmpty() && !firstPriceWithCurrency.equals("-") && !firstPriceWithCurrency.matches("\\$8") && !firstPriceWithCurrency.contains("8.88") && !firstPriceWithCurrency.contains("$88") && !priceToken.contains("$8.$") && !priceToken.contains("_$.88")) 
+            priceToken=firstPriceWithCurrency;
+        String normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_1+"(?!\\d)", priceToken);
+        if (normalizedPrice.isEmpty()) normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_2+"(?!\\d)", priceToken);
+        if (normalizedPrice.isEmpty() && regExMatchesSubsequenceOfString(RegExConstants.GRATIS, priceToken)) return("0");
+        if (!normalizedPrice.isEmpty() && priceToken.startsWith("-")) normalizedPrice="-"+normalizedPrice;
+               if (normalizedPrice.length() < normalizedPriceLargeFont.length()) normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_1+"(?!\\d)", normalizedPriceLargeFont);
+        return normalizeLargePrice(normalizedPrice); */
+        if (priceToken.contains("29.341"))
+                System.out.println("here");
+        String priceNormalized=priceToken.substring(0, priceToken.indexOf("\t"));
+        Float priceNormalizedFloat=Float.valueOf(priceNormalized);
+        return String.format("%.2f", priceNormalizedFloat); 
+     }
+    
+     public static String normalizeLargePrice(String price) {
+           if (price.indexOf(",") < price.indexOf("."))
+             return price.replace(",", "");
+           else 
+             return price.replace(".", "").replace(",",".");
+     }
+    
+     public static String fetchNormalizedFirstPriceWithCurrency(String priceToken) {
         if (priceToken==null) return ("");      
         String normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_2+"\\s*"+RegExConstants.CURRENCY_CODE_REGEX, priceToken);
         if (normalizedPrice.isEmpty()) normalizedPrice = fetchRegExMatch(RegExConstants.NORMALIZED_PRICE_REGEX_1+"\\s*"+RegExConstants.CURRENCY_CODE_REGEX, priceToken);       
@@ -270,17 +315,17 @@ public class ModelSummary {
  
         if (normalizedPrice.isEmpty() && regExMatchesSubsequenceOfString(RegExConstants.GRATIS, priceToken)) return("0");
         
-        if (regExMatchesSubsequenceOfString(RegExConstants.NEGATIVE_CURRENCY_PRICE_REGEX, priceToken)) normalizedPrice="-"+normalizedPrice;
-        return normalizedPrice.replace(",", "");
+        //if (regExMatchesSubsequenceOfString(RegExConstants.NEGATIVE_CURRENCY_PRICE_REGEX, priceToken)) normalizedPrice="-"+normalizedPrice;
+        return normalizeLargePrice(normalizedPrice); 
     }
 	/** Extracts the total from the line that contains the total. The line should be the line that contains label=total. Returns -999999 if no total found
 	 * @param line
 	 * @return total
 	 */
-	private float getTotalFromLine(String line) {
+	private static float getTotalFromLine(String line) {
 
 		try {
-			String totalString = fetchNormalizedPrice(line.replace(",",""));//Matcher m = TOTAL_REGEX.matcher(line.replace(",",""));
+			String totalString = fetchNormalizedPrice(line);//Matcher m = TOTAL_REGEX.matcher(line.replace(",",""));
 			if (!totalString.isEmpty()) {
 				return Float.parseFloat(totalString);
 			} else { 
@@ -320,6 +365,7 @@ public class ModelSummary {
 		ArrayList<Receipt> trueToFalse = new ArrayList<Receipt>();
 		ArrayList<Receipt> trueToFalseAndCorrect = new ArrayList<Receipt>();
 		ArrayList<Receipt> falseToTrue = new ArrayList<Receipt>();
+                ArrayList<Receipt> lostTotal = new ArrayList<Receipt>();
 		ArrayList<Receipt> lowToHighConfid = new ArrayList<Receipt>();
 		ArrayList<Receipt> highToLowConfid = new ArrayList<Receipt>();
 		ArrayList<Receipt> newFalsePos = new ArrayList<Receipt>();
@@ -334,7 +380,7 @@ public class ModelSummary {
 
 		// for each receipt, compare it to another receipt and see what the difference is. 
 		// --> can make big changes here
-		
+
 		while (oldIter.hasNext()) {
 			Entry<String, Receipt> e = oldIter.next();
 			String guidOld = e.getKey();
@@ -346,8 +392,9 @@ public class ModelSummary {
                                 System.out.println("here");*/
 
 			Receipt rNew = this.getOutputSet().get(guidOld);
-                        /*if (rNew==null) 
-                            System.out.println("here"); */
+                        if (rNew==null) 
+                            System.out.println("here"); 
+                      try {
 			if (!rNew.verif && rOld.verif) {
 				trueToFalse.add(rNew);
 				if ((rOld.total == rOld.trueTotal && (rOld.trueNumItems==0 || rOld.numItems == rOld.trueNumItems)) &&
@@ -367,6 +414,9 @@ public class ModelSummary {
 			if (!(rNew.total==rNew.trueTotal && (rNew.trueNumItems==0 || rNew.numItems == rNew.trueNumItems)) && rNew.verif==true && (rOld.verif==false || !(rOld.verif==true && (rOld.total!=rOld.trueTotal | (rOld.trueNumItems>0 && rOld.numItems!=rOld.trueNumItems))))) {
 				newFalsePos.add(rNew);
 			}
+                        if (((Float)rNew.total==null || rNew.total == -999999)  && (Float)rOld.total != null && rOld.total != -999999 )
+                            lostTotal.add(rNew);
+                        
 			
 			if (rNew.verif==true && !(rNew.total==rNew.trueTotal) && !(rOld.verif==true && !(rOld.total==rOld.trueTotal))) {
 				newFalsePosTotal.add(rNew);
@@ -388,13 +438,17 @@ public class ModelSummary {
                             !(rOld.total==rOld.trueTotal)) {
 				newL1Positives.add(rNew);
 			}
-				
+		       } catch (Exception ex) {
+                            ex.printStackTrace();
+                       }	
 			
 		}
+
 
 		//take each of those ArrayLists, and put them into a hashmap, keyed by a descriptive string. Will access the arraylists in the main method by the string, so make it compact and descriptive.
 		HashMap<String,ArrayList<Receipt>> result = new HashMap<String,ArrayList<Receipt>>();
 		result.put("TRUE-TO-FALSE", trueToFalse);
+                result.put("LOST THE TOTAL", lostTotal);
 		result.put("TRUE-POSITIVE-TO-FALSE-NEGATIVE", trueToFalseAndCorrect);
 		result.put("FALSE-TO-TRUE", falseToTrue);
 		
@@ -506,4 +560,9 @@ public class ModelSummary {
 			}
 		}
 	}
+        
+        public static void main(String[] args) throws IOException {
+               float totalFromLine = getTotalFromLine("29.341	FEA_ALPHABETS	FEA_DECIMAL	FEA_CURRENCYSIGN	FEA_WEBADDRESS_NOT	FEA_KEYWORD_total	FEA_TOTAL_WORDCOUNT_2	FEA_$88.888	FEA_total	FEA_TXTBLK_CURRENCYPRICE	FEA_TXTBLK_LASTPRICE	FEA_TXTBLK_ROOT	FEA_TOTAL_$29.341	DIRECTLY_FOLLOWING_FEA_DECIMAL	DIRECTLY_FOLLOWING_FEA_CURRENCYSIGN	DIRECTLY_FOLLOWING_FEA_WEBADDRESS_NOT	DIRECTLY_FOLLOWING_FEA_TOTAL_WORDCOUNT_1	DIRECTLY_FOLLOWING_FEA_$88.88	DIRECTLY_FOLLOWING_FEA_TXTBLK_CURRENCYPRICE	DIRECTLY_FOLLOWING_FEA_TXTBLK_ROOT	DIRECTLY_FOLLOWING_FEA_$29.34	INDIRECTLY_FOLLOWING_FEA_ALPHABETS	INDIRECTLY_FOLLOWING_FEA_HYPHENATED	INDIRECTLY_FOLLOWING_FEA_WEBADDRESS_NOT	INDIRECTLY_FOLLOWING_FEA_KEYWORD_Subtotal	INDIRECTLY_FOLLOWING_FEA_TOTAL_WORDCOUNT_2	INDIRECTLY_FOLLOWING_FEA_--------	INDIRECTLY_FOLLOWING_FEA_subtotal	INDIRECTLY_FOLLOWING_FEA_COMMON_WORD_subtotal	INDIRECTLY_FOLLOWING_FEA_TXTBLK_ROOT	INDIRECTLY_FOLLOWING_FEA_BEFORE_PRICE	INDIRECTLY_FOLLOWING_FEA_Subtotal_--------	ININDIRECTLY_FOLLOWING_FEA_CURRENCYSIGN	ININDIRECTLY_FOLLOWING_FEA_WEBADDRESS_NOT	ININDIRECTLY_FOLLOWING_FEA_TOTAL_WORDCOUNT_1	ININDIRECTLY_FOLLOWING_FEA_$88,88	ININDIRECTLY_FOLLOWING_FEA_TXTBLK_ROOT	ININDIRECTLY_FOLLOWING_FEA_AFTER_ITEM_LABEL	ININDIRECTLY_FOLLOWING_FEA_$29,34	DIRECTLY_PRECEDING_FEA_CAPITALIZED	DIRECTLY_PRECEDING_FEA_ALPHABETS	DIRECTLY_PRECEDING_FEA_WEBADDRESS_NOT	DIRECTLY_PRECEDING_FEA_TOTAL_WORDCOUNT_1	DIRECTLY_PRECEDING_FEA_master	DIRECTLY_PRECEDING_FEA_TXTBLK_ROOT	DIRECTLY_PRECEDING_FEA_Master	INDIRECTLY_PRECEDING_FEA_NUMERIC	INDIRECTLY_PRECEDING_FEA_WEBADDRESS_NOT	INDIRECTLY_PRECEDING_FEA_TOTAL_WORDCOUNT_1	INDIRECTLY_PRECEDING_FEA_888	INDIRECTLY_PRECEDING_FEA_TXTBLK_ROOT	INDIRECTLY_PRECEDING_FEA_338	label=total_price");              
+               System.out.println(totalFromLine);
+        }
 }

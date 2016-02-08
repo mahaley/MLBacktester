@@ -17,4 +17,19 @@
 //htmloutput - No Externals,0,1,2013 07-02 set 756.txt,htmloutput - 4.2.2.1 No Externals,2Jing's github htmloutput - 756,Jing github htmloutput - 756
 //htmloutput - With Externals,0,1,2013 07-02 set 756.txt,htmloutput,htmloutput - 4.2.2.1 No Externals,htmloutput - 4.2.2.1 No Externals
 //htmloutput,0,1,2013 07-02 set 756.txt,htmloutput,htmloutput - 4.3.4 Before Allowing Summary,htmloutput - 4.3.4 Before Allowing Summary
-htmloutput,0,1,2013 07-02 set 756.txt,htmloutput,htmloutput - 4.3.7,htmloutput - 4.3.7
+//Level2 Production models,0,1,3-12 OCRReceipt SnapShot 1000.txt,htmloutput,Level2 QA models,htmloutput - 4.4 ocr 1000 with Level2
+//htmloutput,0,1,3-12 OCRReceipt SnapShot 1000 New.txt,htmloutput,htmloutput - 4.5.3,htmloutput - 4.5.3
+//htmloutput,0,1,5-5-OCRResults.txt,htmloutput,htmloutput - Autozone only,htmloutput - Autozone only
+//htmloutput,0,1,5-5-OCRResults.txt,htmloutput,htmloutput - clearedReceiptTotal,htmloutput - clearedReceiptTotal
+//htmloutput,0,1,5-5-OCRResults.txt,htmloutput,htmloutput - Full SingleZone unleashed,htmloutput - Full SingleZone unleashed
+//htmloutput,0,1,5-5-OCRResults.txt,htmloutput,htmloutput - Autozone & SingleZone All Paper,htmloutput - Autozone & SingleZone All Paper
+//htmloutput,0,1,5-5-OCRResults.txt,htmloutput,htmloutput - 4.5.3.4 OCR,htmloutput - 4.5.3.4 OCR
+//htmloutput,0,1,5-5-OCRResults.txt,htmloutput,htmloutput - 4.8.2 With Line Tokenization,htmloutput - 4.8.2 With Line Tokenization
+//htmloutput,0,1,11-18-OCRGroundTruth.txt,htmloutput,htmloutput - 4.9.2.1,htmloutput - 4.9.2.1
+//htmlSamCroppedoutput,0,1,11-18-OCRGroundTruth.txt,htmlSamCroppedoutput,htmloutput - 4.9.2.2,htmloutput - 4.9.2.2
+//htmlSamWhitespaceOnlyoutput,0,1,11-18-OCRGroundTruth.txt,htmlSamWhitespaceOnlyoutput,htmloutput - 4.9.2.2,htmloutput - 4.9.2.2
+//htmloutput,0,1,11-18-OCRGroundTruth.txt,htmloutput,htmloutput - 4.9.2 LessLineTokenization,htmloutput - 4.9.2 LessLineTokenization
+//htmloutput,0,1,5-28-GBPWithTax.txt,htmloutput,htmloutput,htmloutput
+//htmloutput,0,1,11-18-OCRGroundTruth.txt,htmloutput,htmloutput - 5.5,htmloutput - 5.5
+ProPaperReceiptsUSDoutput,0,1,ProUsersReceiptsUSD.txt,ProPaperReceiptsUSDoutput,ProPaperReceiptsUSDoutput - Copy,ProPaperReceiptsUSDoutput - Copy
+//ProPaperReceiptsAUDoutput,0,1,ProUsersReceiptsAUD.txt,ProPaperReceiptsAUDoutput,ProPaperReceiptsAUDoutput - Copy,ProPaperReceiptsAUDoutput - Copy
